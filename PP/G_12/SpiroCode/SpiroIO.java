@@ -1,6 +1,6 @@
-public class SproIO extends ごんごん {
+public class SpiroIO extends ごんごん {
 
-	private String sirevtory = null;
+	private String direvtory = null;
 
 	private View view = null;
 
