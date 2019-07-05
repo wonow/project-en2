@@ -1,3 +1,8 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class SpiroModel extends mvc.Model implements Runnable {
 
 	private SpurGear spurGear;
@@ -12,37 +17,69 @@ public class SpiroModel extends mvc.Model implements Runnable {
 
 	private boolean isAnimated;
 
-	private int tickTime;
+	private int tickTime ; // 100 <= tickTime <= 0
 
-	private Double pinionFegrees;
+	private Double pinionDegrees;
 
 	private ArrayList<DesignLocus> designLoci;
 
 	public void SpiroModel() {
+		super();
 		this.spurGear = null;
 		this.PinionGear = null;
 		this.designLocus = null;
-		this.tickTime = null;
+		this.tickTime = 50;
 		this.pinionFegrees = null;
+
+	//コンストラクタ
+	//インスタンス生成時に自動で呼び出される性質からクラスのメンバを初期化するときに使われます。
+	public SpiroModel() {
+		super();
+		this.spurGear = new SpurGear();
+		this.pinionGear = new PinionGear();
+		this.isInscribe = false;
+		this.isRainbow = false;
+		this.designLocus = new DesignLocus();
+		this.isAnimated = false;
+		this.tickTime = 50;
+		this.pinionDegrees = 0.0d;
+		this.designLoci = new ArrayList<DesignLocus>();
 	}
 
-	public void SpiroModel(Cons a List) {
-
+	//SpiroModelにCons型aListの値をsetする
+	public SpiroModel(Cons aList) {
+		super();
+		this.spurGear = aList.;
+		this.pinionGear = aList.;
+		this.isInscribe = aList.;
+		this.isRainbow = aList.;
+		this.designLocus = aList.;
+		this.isAnimated = aList.;
+		this.tickTime = aList.;
+		this.pinionDegrees = aList.;
+		this.designLoci = aList.;
 	}
 
-	public DesignLocus designLocus() { //軌跡
+	public DesignLocus designLocus() {//軌跡(単数)
+		return this.designLocus;
+
+	public DesignLocus designLocus() {
 		return null;
+
+	public DesignLocus designLocus() {
+		return null;
+
 	}
 
-	public ArrayList<DesignLocus> designLoci() { //軌跡(複数形)
-		return null;
+	public ArrayList<DesignLocus> designLoci() {//軌跡(複数形)
+		return this.designLoci;
 	}
 
 	public PinionGear firstPinionGear() {
-		return null;
+		return pinionGear;
 	}
 
-	public void flush() {
+	public void flush() { //くっついているか（スパーギアとピニオンギア)を判断する
 
 	}
 
@@ -50,11 +87,11 @@ public class SpiroModel extends mvc.Model implements Runnable {
 		return null;
 	}
 
-	public boolean isAnimeated() {
+	public boolean isAnimeated() { //描いているかどうかを返す
 		return this.isAnimated;
 	}
 
-	public boolean isCircumscribe() {
+	public boolean isCircumscribe() { //制限(?)しているかどうかを返す
 		return false;
 	}
 
@@ -62,19 +99,19 @@ public class SpiroModel extends mvc.Model implements Runnable {
 		return false;
 	}
 
-	public boolean isInscribe() {
+	public boolean isInscribe() { //刻む.....???????
 		return false;
 	}
 
-	public boolean isRainbow() {
+	public boolean isRainbow() { //虹色状態になっているか
 		return this.isRainbow;
 	}
 
-	public boolean isStopped() {
+	public boolean isStopped() { //（描画が?)止まっているかどうか
 		return false;
 	}
 
-	public PinionGear lastPinionGear() {
+	public PinionGear lastPinionGear() { //
 		return null;
 	}
 
@@ -90,11 +127,11 @@ public class SpiroModel extends mvc.Model implements Runnable {
 
 	}
 
-	public void pinionCenter(Point aPoint) {
+	public void pinionCenter(Point aPoint) { //ピニオンギアの中心について
 
 	}
 
-	public Double pinionDegrees(double spurDegrees) {
+	public Double pinionDegrees(double spurDegrees) { //ピニオンギアの角度
 		return null;
 	}
 
@@ -102,11 +139,11 @@ public class SpiroModel extends mvc.Model implements Runnable {
 		return null;
 	}
 
-	public void pinionPen(Point aPoint) {
+	public void pinionPen(Point aPoint) { //ピニオンギアのペン
 
 	}
 
-	public void pinionRadius(Point aPoint) {
+	public void pinionRadius(Point aPoint) { //ピニオンギアの半径
 
 	}
 
@@ -114,15 +151,15 @@ public class SpiroModel extends mvc.Model implements Runnable {
 
 	}
 
-	public void spiroClear() {
+	public void spiroClear() { //描画を削除する
 
 	}
 
-	public void spiroCircumscribe(View aView) {
+	public void spiroCircumscribe(View aView) { //制限する？
 
 	}
 
-	public void spiroColor(View aView) {
+	public void spiroColor(View aView) { //スピログラフの色
 
 	}
 
@@ -134,11 +171,11 @@ public class SpiroModel extends mvc.Model implements Runnable {
 
 	}
 
-	public SpiroModel spiroNew() {
+	public SpiroModel spiroNew() { //新しくスピログラフを生成する
 		return null;
 	}
 
-	public void spiroNib(View aView) {
+	public void spiroNib(View aView) { //スピログラフのペン先
 
 	}
 
@@ -154,35 +191,39 @@ public class SpiroModel extends mvc.Model implements Runnable {
 
 	}
 
-	public void spiroSpeedDown() {
+	/* これ以降はメニューで設定するためのものだと考えられる */
 
+	public void spiroSpeedDown() {
+		this.tickTime = this.tickTime + 10;
 	}
 
 	public void spiroSpeedUp() {
-
+		this.tickTime = this.tickTime - 10;
 	}
 
 	public void spiroStart() {
-
+		this.isAnimated = true;
 	}
 
 	public void spiroStop() {
+		this.isAnimated = false;
+	}
+
+	/*                                              */
+
+	public void spurCenter(Point aPoint) { //スパーギアの中心について
 
 	}
 
-	public void spurCenter(Point aPoint) {
-
-	}
-
-	public Double spurDegrees(double pinionDegrees) {
+	public Double spurDegrees(double pinionDegrees) { //スパーギアの角度について
 		return null;
 	}
 
-	public SpurGear spurGear() {
+	public SpurGear spurGear() { //すぅぅぅぅぱぁぁぁぁああぁぁぁぁ
 		return null;
 	}
 
-	public void spurRadius(Point aPoint) {
+	public void spurRadius(Point aPoint) { //スパーギアの半径
 
 	}
 
@@ -191,7 +232,7 @@ public class SpiroModel extends mvc.Model implements Runnable {
 	}
 
 	public String toString() {
-		return null;
+		return mvc.Model.toString();
 	}
 
 	public void underConstruction() {
